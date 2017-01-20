@@ -57,9 +57,13 @@ def application(environ, start_response):
 
 
 if __name__ == '__main__':
-    waterApplication.waterProcess()
+#    waterApplication.readConfigFile()
+#    response , browser =  waterApplication.handleWaterLogin()
+#    acctInfo =  waterApplication.getWaterAccountMain(response)
+
     welcome = readHtmlFile(indexFile)
-#    print(welcome)
+    # welcome = readHtmlFile("wat.html")
+    
     httpd = make_server('', 8000, application)
     print("Serving on port 8000...")
     httpd.serve_forever()

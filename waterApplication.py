@@ -15,8 +15,13 @@ def readConfigFile():
             key = entry[0].strip()
             val = entry[1].strip()
             loginInfo[key] = val 
-    print("this is logininfo", loginInfo)
+ #   print("this is logininfo", loginInfo)
     
+def writeFile(content, filename):
+    with open(filename, 'w') as op:
+        op.write(content)
+        op.close()
+
 
 def getLoginInfo(browser):
     login_page = browser.get(URL)
@@ -43,8 +48,11 @@ def getWaterAccountMain(response):
     acctText = ""
     acctInfo = response.soup
     if acctInfo:
-        acctText = acctInfo.get_text()
-    print ("Got acct info")
+#        acctText = acctInfo.get_text() # get text only
+        acctText = acctInfo
+#    print ("Got acct info")
+   # print(acctInfo)
+    writeFile(str(acctInfo), "wat.html")
     return acctText
  
 
@@ -57,7 +65,7 @@ def getWaterBillHistory(response, browser):
             print(link.get('href'))
             history_page = browser.get(availUrls)
             if history_page:
-                    print "Got history page"
+                    print ("Got history page")
                     historyPage =  history_page.soup.get_text()
     return historyPage
 
@@ -80,4 +88,4 @@ if __name__ == "__main__":
 
 
 
-#            print " ================================"
+#  print " ================================"
