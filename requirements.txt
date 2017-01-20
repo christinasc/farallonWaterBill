@@ -6,3 +6,6 @@ pyasn1-modules==0.0.8
 rsa==3.4.2
 six==1.10.0
 uritemplate==3.0.0
+requests==2.12.5
+beautifulsoup4==4.5.3
+MechanicalSoup==0.6.0
