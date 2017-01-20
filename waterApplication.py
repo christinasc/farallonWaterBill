@@ -1,5 +1,4 @@
-import mechanicalsoup 
-import re
+import mechanicalsoup, re
 from sys import argv
 
 loginInfo = { 'LOGIN':"login", 
@@ -15,7 +14,7 @@ def readConfigFile():
             entry = line.split(":")
             key = entry[0].strip()
             val = entry[1].strip()
-            loginInfo[key] = val            
+            loginInfo[key] = val 
     print("this is logininfo", loginInfo)
     
 
@@ -28,45 +27,57 @@ def getLoginInfo(browser):
     response = browser.submit(login_form, login_page.url)
     return response
 
-def main():
-    readConfigFile()
-
+def handleWaterLogin():
     # create a browser object
     browser = mechanicalsoup.Browser()
     response = getLoginInfo(browser)
     if response:
         print("Your're connected as " + loginInfo['USER_NAME'])
-        print response
+       # print response
     else:
         print("Not connected")
-
-'''
-        acctInfo = response.soup
-        if acctInfo:
-            print " response found"        
-            #print (acctInfo.get_text())
-            acctText = acctInfo.get_text()
-            print acctText
-            print " ================================"
-'''
+    return response, browser
 
 
-'''
-            print " ================================"
+def getWaterAccountMain(response):
+    acctText = ""
+    acctInfo = response.soup
+    if acctInfo:
+        acctText = acctInfo.get_text()
+    print ("Got acct info")
+    return acctText
+ 
 
-        for link in response.soup.find_all('a'):
-            availUrls = str(link.get('href'))
-           # print ":", availUrls, ":"
-            if re.search(r"history", availUrls):
-                print "link found for history, following...."
-                print(link.get('href'))
-                history_page = browser.get(availUrls)
-                if history_page:
-                        print "got history page"
-                        print history_page.soup.get_text()
-'''
+def getWaterBillHistory(response, browser):
+    historyPage = ""
+    for link in response.soup.find_all('a'):
+        availUrls = str(link.get('href'))
+        if re.search(r"history", availUrls):
+            print "link found for history, following...."
+            print(link.get('href'))
+            history_page = browser.get(availUrls)
+            if history_page:
+                    print "Got history page"
+                    historyPage =  history_page.soup.get_text()
+    return historyPage
 
+
+
+def waterProcess():
+    readConfigFile()
+    response , browser =  handleWaterLogin()
+    acctInfo =  getWaterAccountMain(response)
+    historyPage = getWaterBillHistory(response, browser)
+
+
+def main():
+    waterProcess()
 
 
 if __name__ == "__main__":
     main()
+
+
+
+
+#            print " ================================"
