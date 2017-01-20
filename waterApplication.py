@@ -20,7 +20,6 @@ def readConfigFile():
     
 
 def getLoginInfo(browser):
-    # req. login name
     login_page = browser.get(URL)
     login_form = login_page.soup.find("form", {"class":"ywploginform"})
 
@@ -67,10 +66,7 @@ def main():
                         print history_page.soup.get_text()
 '''
 
-#    print(response.soup.title.text)
-#    user = response.soup.find("span", {"class":"u-linkComplex-target"}).string
-#    user = response.soup.find("")
-#    if USERNAME_NAME in user:
+
 
 if __name__ == "__main__":
     main()
