@@ -1,6 +1,17 @@
 import mechanicalsoup, re
 from sys import argv
 
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'ebdb',
+            'USER': 'farallon',
+            'PASSWORD': 'iceoasis',
+            'HOST': 'aau22sqmew94ym.csniiwsrgjcu.us-west-2.rds.amazonaws.com',
+            'PORT': '3306',
+        }
+    }
+
 loginInfo = { 'LOGIN':"login", 
               'PASSWORD':"password",
               'USER_NAME': "username"}

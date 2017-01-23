@@ -9,3 +9,4 @@ uritemplate==3.0.0
 requests==2.12.5
 beautifulsoup4==4.5.3
 MechanicalSoup==0.6.0
+MySQL-python==1.2.3
