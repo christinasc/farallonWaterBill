@@ -1,6 +1,8 @@
 import mechanicalsoup, re
 from sys import argv
 
+
+'''
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -11,6 +13,10 @@ DATABASES = {
             'PORT': '3306',
         }
     }
+'''
+
+
+
 
 loginInfo = { 'LOGIN':"login", 
               'PASSWORD':"password",

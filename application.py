@@ -1,8 +1,21 @@
 import logging
 import logging.handlers
 import waterApplication
+import os
 
 from wsgiref.simple_server import make_server
+
+if 'RDS_HOSTNAME' in os.environ:
+  DATABASES = {
+    'default': {
+      'ENGINE': 'django.db.backends.mysql',
+      'NAME': os.environ['RDS_DB_NAME'],
+      'USER': os.environ['RDS_USERNAME'],
+      'PASSWORD': os.environ['RDS_PASSWORD'],
+      'HOST': os.environ['RDS_HOSTNAME'],
+      'PORT': os.environ['RDS_PORT'],
+      }
+    }
 
 
 # Create logger
@@ -49,6 +62,7 @@ def application(environ, start_response):
         response = ''
     else:
         response = welcome
+        
     status = '200 OK'
     headers = [('Content-type', 'text/html')]
 
@@ -57,6 +71,7 @@ def application(environ, start_response):
 
 
 if __name__ == '__main__':
+
 #    waterApplication.readConfigFile()
 #    response , browser =  waterApplication.handleWaterLogin()
 #    acctInfo =  waterApplication.getWaterAccountMain(response)
