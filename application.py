@@ -2,7 +2,7 @@ import logging
 import logging.handlers
 import waterApplication
 import os
-import pymysql
+#import pymysql
 import rds_config
 
 from wsgiref.simple_server import make_server
